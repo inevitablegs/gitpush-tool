@@ -46,6 +46,7 @@ from .safety import (
 )
 
 from .status import format_status_dashboard
+from .undo import run_undo_flow
 
 
 # --- GitHub CLI Installation Orchestrator and Helpers ---
@@ -692,6 +693,10 @@ def run():
         print(format_status_dashboard(verbose=verbose))
         sys.exit(0)
 
+    # Handle undo subcommand upfront if detected
+    if len(sys.argv) > 1 and sys.argv[1].lower() == "undo":
+        sys.exit(run_undo_flow(sys.argv[2:]))
+
     # Handle guard subcommand upfront if detected
     if len(sys.argv) > 1 and sys.argv[1].lower() in ("guard", "check", "verify-danger"):
         guard_args = sys.argv[2:]
@@ -700,9 +705,12 @@ def run():
         sys.exit(handle_guard_command(clean_args, auto_confirm=auto_confirm))
 
     parser = argparse.ArgumentParser(
-        description="🚀 Supercharged Git push tool with decision-support status dashboard and safety guards",
+        description="🚀 Supercharged Git push tool with decision-support status, undo engine, and safety guards",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""Examples:
+  Interactive undo:      gitpush undo
+  Undo last commit:      gitpush undo commit
+  Undo push / rollback:  gitpush undo push
   Decision status:       gitpush status
   Standard push:         gitpush "My new feature"
   Push without prompt:   gitpush "My new feature" -y

@@ -1,6 +1,6 @@
 Metadata-Version: 2.4
 Name: gitpush-tool
-Version: 0.4.1
+Version: 0.4.2
 Summary: Supercharged Git push tool with automatic GitHub repo creation and pushing
 Home-page: https://github.com/inevitablegs/gitpush
 Author: Ganesh Sonawane

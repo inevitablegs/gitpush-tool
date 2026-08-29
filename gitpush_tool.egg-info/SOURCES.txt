@@ -9,6 +9,7 @@ gitpush/__init__.py
 gitpush/cli.py
 gitpush/safety.py
 gitpush/status.py
+gitpush/undo.py
 gitpush_tool.egg-info/PKG-INFO
 gitpush_tool.egg-info/SOURCES.txt
 gitpush_tool.egg-info/dependency_links.txt
@@ -17,3 +18,4 @@ gitpush_tool.egg-info/top_level.txt
 tests/test_cli.py
 tests/test_safety.py
 tests/test_status.py
+tests/test_undo.py

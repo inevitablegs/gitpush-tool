@@ -1,10 +1,12 @@
 """
-GitPush Tool - Supercharged Git CLI (v0.4.1)
+GitPush Tool - Supercharged Git CLI (v0.4.2)
 
 A powerful command-line tool that simplifies Git operations with automatic GitHub
-repository creation, pre-push diffstat inspection, and dangerous operation safeguards.
+repository creation, decision-support status, an intelligent undo engine, and dangerous operation safeguards.
 
 Key Features:
+• Intelligent undo engine (`gitpush undo`, `gitpush undo commit`, `gitpush undo push`)
+• Decision-support repository status (`gitpush status`) with health score
 • Pre-push diffstat line changes (+/-) and branch sync inspection
 • Dangerous operation guard (reset --hard, force push, branch delete, clean, dirty rebase)
 • Protected branch & detached HEAD detection
@@ -14,6 +16,9 @@ Key Features:
 • GitHub CLI integration
 
 Basic Usage:
+  gitpush undo                          # Interactive context-aware undo
+  gitpush undo commit                   # Undo last commit (keeps file changes)
+  gitpush undo push                     # Safely rollback last push
   gitpush status                        # Decision-support repository status
   gitpush "Commit message"              # Standard push with preview
   gitpush "Commit message" -y           # Push without confirmation prompt
