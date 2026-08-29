@@ -9,6 +9,7 @@ A supercharged Git CLI and safety tool that simplifies repository creation and p
 
 ## ✨ Features
 
+- **Decision-Support Status Dashboard (`gitpush status`):** Actionable repository overview showing worktree breakdown, commit sync, intelligent next-step recommendations, and a 0-100 Repo Health score.
 - **Pre-Push Safety & Diffstat Preview:** See changed files, line additions/deletions (`+X, -Y`), ahead/behind status, and pending commits before pushing.
 - **Dangerous Git Operation Guard:** Analyzes and protects against risky actions (`reset --hard`, force pushes, deleting unmerged branches, dirty `git clean`, detached HEADs).
 - **Protected Branch Safeguard:** Automatically detects and alerts when pushing or force-pushing to `main`, `master`, `prod`, `release`, or `dev`.
@@ -16,6 +17,40 @@ A supercharged Git CLI and safety tool that simplifies repository creation and p
 - **Safe Force Pushing:** Uses `--force-with-lease` by default to avoid overwriting teammate commits.
 - **Dry-Run Mode:** Preview your push inspection without modifying anything.
 - **Non-Interactive & CI Friendly:** Skip prompts with `-y` or `--yes`.
+
+---
+
+## 📊 Decision-Support Status Dashboard (`gitpush status`)
+
+```text
+Repository:  my-project
+Branch:      feature/payment
+Tracking:    origin/feature/payment
+
+WORKTREE
+────────────────────────
+Modified       4
+Added          2
+Deleted        1
+Untracked      3
+Line Changes   +142, -18
+
+COMMITS
+────────────────────────
+Ahead          3
+Behind         1
+
+PUSH / STATUS
+────────────────────────
+⚠ Remote has 1 commit(s) you don't have locally.
+
+Recommended:
+    git pull --rebase
+    gitpush "Commit message"
+
+Health:
+    82/100 [████████░░] Good (Minor Action Needed)
+```
 
 ---
 

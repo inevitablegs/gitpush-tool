@@ -1,5 +1,5 @@
 """
-GitPush Tool - Supercharged Git CLI (v0.4.0)
+GitPush Tool - Supercharged Git CLI (v0.4.1)
 
 A powerful command-line tool that simplifies Git operations with automatic GitHub
 repository creation, pre-push diffstat inspection, and dangerous operation safeguards.
@@ -14,6 +14,7 @@ Key Features:
 • GitHub CLI integration
 
 Basic Usage:
+  gitpush status                        # Decision-support repository status
   gitpush "Commit message"              # Standard push with preview
   gitpush "Commit message" -y           # Push without confirmation prompt
   gitpush --dry-run                     # Preview changes without pushing

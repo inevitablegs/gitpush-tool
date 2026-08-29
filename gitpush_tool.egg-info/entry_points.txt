@@ -1,3 +1,4 @@
 [console_scripts]
 gitpush = gitpush.cli:run
 gitpush-guard = gitpush.cli:run
+gitpush-status = gitpush.cli:run

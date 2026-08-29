@@ -45,6 +45,8 @@ from .safety import (
     Style
 )
 
+from .status import format_status_dashboard
+
 
 # --- GitHub CLI Installation Orchestrator and Helpers ---
 
@@ -684,6 +686,12 @@ def handle_guard_command(raw_args: List[str], auto_confirm: bool = False) -> int
 # --- Main Entry Point ---
 
 def run():
+    # Handle status subcommand upfront if detected
+    if len(sys.argv) > 1 and sys.argv[1].lower() == "status":
+        verbose = "-v" in sys.argv or "--verbose" in sys.argv
+        print(format_status_dashboard(verbose=verbose))
+        sys.exit(0)
+
     # Handle guard subcommand upfront if detected
     if len(sys.argv) > 1 and sys.argv[1].lower() in ("guard", "check", "verify-danger"):
         guard_args = sys.argv[2:]
@@ -692,9 +700,10 @@ def run():
         sys.exit(handle_guard_command(clean_args, auto_confirm=auto_confirm))
 
     parser = argparse.ArgumentParser(
-        description="🚀 Supercharged Git push tool with GitHub repo creation, diff previews, and safety guards",
+        description="🚀 Supercharged Git push tool with decision-support status dashboard and safety guards",
         formatter_class=argparse.RawDescriptionHelpFormatter,
         epilog="""Examples:
+  Decision status:       gitpush status
   Standard push:         gitpush "My new feature"
   Push without prompt:   gitpush "My new feature" -y
   Dry run preview:       gitpush "My new feature" --dry-run
