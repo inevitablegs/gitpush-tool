@@ -1,0 +1,13 @@
+LICENSE
+MANIFEST.in
+README.md
+pyproject.toml
+setup.py
+gitpush/__doc__.py
+gitpush/__init__.py
+gitpush/cli.py
+gitpush_tool.egg-info/PKG-INFO
+gitpush_tool.egg-info/SOURCES.txt
+gitpush_tool.egg-info/dependency_links.txt
+gitpush_tool.egg-info/entry_points.txt
+gitpush_tool.egg-info/top_level.txt

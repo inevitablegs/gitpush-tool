@@ -1,0 +1,83 @@
+Metadata-Version: 2.4
+Name: gitpush-tool
+Version: 0.3.6
+Summary: Supercharged Git push tool with automatic GitHub repo creation and pushing
+Home-page: https://github.com/inevitablegs/gitpush
+Author: Ganesh Sonawane
+Author-email: sonawaneganu3101@gmail.com
+License: MIT
+Project-URL: Documentation, https://github.com/inevitablegs/gitpush
+Project-URL: Source, https://github.com/inevitablegs/gitpush
+Project-URL: Tracker, https://github.com/inevitablegs/gitpush/issues
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: license
+Dynamic: license-file
+Dynamic: project-url
+Dynamic: requires-python
+Dynamic: summary
+
+# GitPush Tool - Complete Documentation
+
+## 📦 Installation
+```bash
+pip install gitpush-tool
+gh auth login  # Authenticate with GitHub
+```
+
+## 🚀 Core Features
+
+### 1. New Repository Creation
+```bash
+# Create public repo
+gitpush "Initial commit" --new-repo my-project
+
+# Create private repo
+gitpush "Initial commit" --new-repo private-project --private
+```
+
+### 2. Standard Git Operations
+```bash
+# Regular push
+gitpush "Fixed login bug"
+
+# Force push
+gitpush "Rebased history" --force
+
+# Push tags
+gitpush --tags
+```
+
+## ⚙️ Configuration
+
+The tool automatically:
+1. Creates `.gitignore` with sensible defaults
+2. Sets main branch as default
+3. Uses GitHub CLI for secure auth
+
+## 🐛 Common Issues
+
+**"Repository already exists"**
+```bash
+❌ Repository 'my-repo' already exists
+```
+Solution: Use different name or delete existing repo
+
+**"Authentication failed"**
+```bash
+❌ Failed to authenticate with GitHub
+```
+Solution: Run `gh auth login` separately
+
+## 📝 License
+MIT Licensed - Free for personal and commercial use

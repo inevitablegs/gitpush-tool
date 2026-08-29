@@ -1,0 +1,6 @@
+.env
+gitpush.egg-info
+dist
+build
+token.txt
+digest.txt
