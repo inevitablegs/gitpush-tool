@@ -9,7 +9,9 @@ A supercharged Git CLI and safety tool that simplifies repository creation and p
 
 ## ✨ Features
 
+- **Smart Sync Engine (`gitpush sync`):** Intelligent single-command replacement for `git pull → git add → git commit → git push`. Automatically detects repository state (clean, dirty, ahead, behind, diverged) and safely synchronizes with remote.
 - **Decision-Support Status Dashboard (`gitpush status`):** Actionable repository overview showing worktree breakdown, commit sync, intelligent next-step recommendations, and a 0-100 Repo Health score.
+- **Interactive Undo Engine (`gitpush undo`):** Reversible and safe rollback for commits and pushes with detailed previews.
 - **Pre-Push Safety & Diffstat Preview:** See changed files, line additions/deletions (`+X, -Y`), ahead/behind status, and pending commits before pushing.
 - **Dangerous Git Operation Guard:** Analyzes and protects against risky actions (`reset --hard`, force pushes, deleting unmerged branches, dirty `git clean`, detached HEADs).
 - **Protected Branch Safeguard:** Automatically detects and alerts when pushing or force-pushing to `main`, `master`, `prod`, `release`, or `dev`.
@@ -17,6 +19,50 @@ A supercharged Git CLI and safety tool that simplifies repository creation and p
 - **Safe Force Pushing:** Uses `--force-with-lease` by default to avoid overwriting teammate commits.
 - **Dry-Run Mode:** Preview your push inspection without modifying anything.
 - **Non-Interactive & CI Friendly:** Skip prompts with `-y` or `--yes`.
+
+---
+
+## 🔄 Smart Sync Engine (`gitpush sync`)
+
+Instead of running four separate commands every time:
+```bash
+git pull
+git add .
+git commit -m "..."
+git push
+```
+
+Run **`gitpush sync`** (or `gitpush-sync`). GitPush detects your exact state and handles everything intelligently:
+
+### Scenario A: Local Ahead
+```text
+Local:  3 commits ahead
+Remote: 0 commits ahead
+
+→ Safe to push
+```
+Prompts for push confirmation, or auto-pushes with `gitpush sync -y`.
+
+### Scenario B: Branch Diverged
+```text
+Local:  2 commits ahead
+Remote: 3 commits ahead
+
+⚠ Branch has diverged.
+
+Options:
+  1. Rebase — replay your commits on top of remote (clean history)
+  2. Merge  — merge remote into local (preserves history)
+  3. Abort  — cancel sync
+```
+
+### Scenario C: Modified Files Detected
+```text
+Working Tree: 3 file(s) modified (+45, -8)
+
+Commit before sync? [y/N]: y
+Commit message (Enter for auto): Add user authentication
+```
 
 ---
 
@@ -145,6 +191,12 @@ Continue? [y/N]:
 
 | Command | Description |
 |---|---|
+| `gitpush sync` | Intelligent one-command sync (pull, commit dirty files, rebase/merge, push). |
+| `gitpush sync -y` | Auto-confirms prompts and syncs immediately. |
+| `gitpush sync -m "Msg"` | Sets custom commit message for modified files during sync. |
+| `gitpush sync --rebase` | Prefers rebase automatically when branch has diverged. |
+| `gitpush undo` | Interactive undo engine for commits and pushed history. |
+| `gitpush status` | Decision-support status dashboard with recommendations. |
 | `gitpush "Commit message"` | Stages all changes, previews diffs, commits, and pushes. |
 | `gitpush` | Pushes staged/unpushed changes with safety preview. |
 | `gitpush -y` | Pushes immediately without confirmation prompt. |

@@ -9,7 +9,9 @@ A supercharged Git CLI and safety tool that simplifies repository creation and p
 
 ## ✨ Features
 
+- **Smart Sync Engine (`gitpush sync`):** Intelligent single-command replacement for `git pull → git add → git commit → git push`. Automatically detects repository state (clean, dirty, ahead, behind, diverged) and safely synchronizes with remote.
 - **Decision-Support Status Dashboard (`gitpush status`):** Actionable repository overview showing worktree breakdown, commit sync, intelligent next-step recommendations, and a 0-100 Repo Health score.
+- **Interactive Undo Engine (`gitpush undo`):** Reversible and safe rollback for commits and pushes with detailed previews.
 - **Pre-Push Safety & Diffstat Preview:** See changed files, line additions/deletions (`+X, -Y`), ahead/behind status, and pending commits before pushing.
 - **Dangerous Git Operation Guard:** Analyzes and protects against risky actions (`reset --hard`, force pushes, deleting unmerged branches, dirty `git clean`, detached HEADs).
 - **Protected Branch Safeguard:** Automatically detects and alerts when pushing or force-pushing to `main`, `master`, `prod`, `release`, or `dev`.

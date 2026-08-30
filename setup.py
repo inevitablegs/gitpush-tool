@@ -14,7 +14,8 @@ setup(
             "gitpush=gitpush.cli:run",
             "gitpush-guard=gitpush.cli:run",
             "gitpush-status=gitpush.cli:run",
-            "gitpush-undo=gitpush.cli:run"
+            "gitpush-undo=gitpush.cli:run",
+            "gitpush-sync=gitpush.cli:run"
         ],
     },
     author="Ganesh Sonawane",

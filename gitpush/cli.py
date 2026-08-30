@@ -47,6 +47,7 @@ from .safety import (
 
 from .status import format_status_dashboard
 from .undo import run_undo_flow
+from .sync import run_sync_flow
 
 
 # --- GitHub CLI Installation Orchestrator and Helpers ---
@@ -704,6 +705,29 @@ def run():
         clean_args = [a for a in guard_args if a not in ("-y", "--yes")]
         sys.exit(handle_guard_command(clean_args, auto_confirm=auto_confirm))
 
+    # Handle sync subcommand upfront if detected
+    if len(sys.argv) > 1 and sys.argv[1].lower() == "sync":
+        sync_args = sys.argv[2:]
+        sync_auto = "-y" in sync_args or "--yes" in sync_args
+        sync_rebase = "--rebase" in sync_args
+        sync_message = None
+        # Parse -m / --message
+        for i, arg in enumerate(sync_args):
+            if arg in ("-m", "--message") and i + 1 < len(sync_args):
+                sync_message = sync_args[i + 1]
+                break
+        sync_remote = "origin"
+        for i, arg in enumerate(sync_args):
+            if arg in ("-r", "--remote") and i + 1 < len(sync_args):
+                sync_remote = sync_args[i + 1]
+                break
+        sys.exit(run_sync_flow(
+            auto_confirm=sync_auto,
+            commit_message=sync_message,
+            prefer_rebase=sync_rebase,
+            remote=sync_remote,
+        ))
+
     parser = argparse.ArgumentParser(
         description="🚀 Supercharged Git push tool with decision-support status, undo engine, and safety guards",
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -712,6 +736,10 @@ def run():
   Undo last commit:      gitpush undo commit
   Undo push / rollback:  gitpush undo push
   Decision status:       gitpush status
+  Smart sync:            gitpush sync
+  Sync (auto-confirm):   gitpush sync -y
+  Sync with message:     gitpush sync -m "My changes"
+  Sync (prefer rebase):  gitpush sync --rebase
   Standard push:         gitpush "My new feature"
   Push without prompt:   gitpush "My new feature" -y
   Dry run preview:       gitpush "My new feature" --dry-run
