@@ -194,11 +194,13 @@ def undo_commit(
             
             if is_pushed:
                 print(colorize("\n⚡ Since this commit was already on remote, next steps:", Style.BOLD))
-                print(f"   • To make new changes & safe force-push: {colorize('gitpush \"New message\" --force', Style.CYAN)}")
+                push_example = colorize('gitpush "New message" --force', Style.CYAN)
+                print(f"   • To make new changes & safe force-push: {push_example}")
                 revert_cmd = f"git revert {commit['short_sha']}"
                 print(f"   • To revert remote instead of force-pushing: {colorize(revert_cmd, Style.CYAN)}")
             else:
-                print(f"   • When ready to recommit: {colorize('gitpush \"New commit message\"', Style.CYAN)}")
+                commit_example = colorize('gitpush "New commit message"', Style.CYAN)
+                print(f"   • When ready to recommit: {commit_example}")
             return True
         else:
             print(colorize(f"❌ Failed to reset commit: {res.stderr.strip()}", Style.RED), file=sys.stderr)
